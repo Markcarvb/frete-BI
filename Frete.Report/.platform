@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Frete"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "d86e76d0-02c1-4a7d-b0e4-f8a787608039"
+  }
+}
