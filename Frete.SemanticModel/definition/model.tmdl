@@ -1,9 +1,22 @@
 model Model
 	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
 
 annotation PBI_ProTooling = ["DevMode"]
 
 annotation PBIDesktopVersion = 2.141.1253.0 (25.03)+74f9999a1e95f78c739f3ea2b96ba340e9ba8729
+
+annotation PBI_QueryOrder = ["ajustes"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+ref table ajustes
+ref table DateTableTemplate_23a8cf36-cdde-4325-a875-65772589895b
+ref table LocalDateTable_78d7d8d0-8bfc-47a1-a0c5-6cb883c070d0
 
 ref cultureInfo pt-BR
 

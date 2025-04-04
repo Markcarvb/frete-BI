@@ -1,0 +1,5 @@
+relationship 2632577c-2c27-414e-8cff-85302ce9247a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ajustes.DATA_DESPACHO
+	toColumn: LocalDateTable_78d7d8d0-8bfc-47a1-a0c5-6cb883c070d0.Date
+

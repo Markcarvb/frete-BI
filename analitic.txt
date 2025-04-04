@@ -1,0 +1,12 @@
+       possiveis analises
+
+ 
+total de pedidos V  
+
+custo frete  V
+
+estado que mais saiu pedido V
+
+formas de pagamento V
+
+quantidade vendida por mes V

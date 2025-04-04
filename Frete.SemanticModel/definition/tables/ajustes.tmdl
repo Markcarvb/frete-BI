@@ -1,0 +1,119 @@
+table ajustes
+	lineageTag: aa28457b-4660-4bee-8d12-a18103838b85
+
+	column DATA_PEDIDO
+		dataType: string
+		lineageTag: 4ecebce1-c9ef-497b-8862-cd9af51085f6
+		summarizeBy: none
+		sourceColumn: DATA_PEDIDO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATA_COMPRA
+		dataType: string
+		lineageTag: 1fe74bd5-4f5e-44c9-b138-a936ca0a2d52
+		summarizeBy: none
+		sourceColumn: DATA_COMPRA
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUANTIDADE
+		dataType: int64
+		formatString: 0
+		lineageTag: 3d184ec8-1b34-4eda-af3e-198561219adc
+		summarizeBy: sum
+		sourceColumn: QUANTIDADE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VOLUME_CX
+		dataType: int64
+		formatString: 0
+		lineageTag: 0c99d8c9-03e5-477b-bf32-4ef2f18225ce
+		summarizeBy: sum
+		sourceColumn: VOLUME_CX
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATA_DESPACHO
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 82f51035-2e9e-43ab-8bc6-77b4ebc03471
+		summarizeBy: none
+		sourceColumn: DATA_DESPACHO
+
+		variation Variation
+			isDefault
+			relationship: 2632577c-2c27-414e-8cff-85302ce9247a
+			defaultHierarchy: LocalDateTable_78d7d8d0-8bfc-47a1-a0c5-6cb883c070d0.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATA_ENTREGA
+		dataType: string
+		lineageTag: bcb80d55-8b5a-4ee9-a728-16cdf7fbaaec
+		summarizeBy: none
+		sourceColumn: DATA_ENTREGA
+
+		annotation SummarizationSetBy = Automatic
+
+	column ENTREGA_DIAS
+		dataType: double
+		lineageTag: 83e2e5ce-f4ed-4eac-827d-03cd5fb19a23
+		summarizeBy: sum
+		sourceColumn: ENTREGA_DIAS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ESTADO_BR
+		dataType: string
+		lineageTag: ba0b076f-6115-4b5d-b18d-067b0b3717d5
+		summarizeBy: none
+		sourceColumn: ESTADO_BR
+
+		annotation SummarizationSetBy = Automatic
+
+	column UF
+		dataType: string
+		lineageTag: 8a85b7a9-91e8-4b73-ab31-d2bae02286b5
+		summarizeBy: none
+		sourceColumn: UF
+
+		annotation SummarizationSetBy = Automatic
+
+	column FRETE_CUSTO
+		dataType: double
+		lineageTag: 56ed8d8b-0f53-4210-8190-0083f6fdf322
+		summarizeBy: sum
+		sourceColumn: FRETE_CUSTO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FORMA_PAGAMENTO
+		dataType: string
+		lineageTag: 8b61535d-ba35-4b8c-932e-9d7beb54ff3c
+		summarizeBy: none
+		sourceColumn: FORMA_PAGAMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ajustes = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\Victor\Documents\Desktop\workspace\frete BI\frete-BI\frete.xlsx"), null, true),
+				    ajustes_Sheet = Fonte{[Item="ajustes",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(ajustes_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"DATA_PEDIDO", type any}, {"DATA_COMPRA", type any}, {"QUANTIDADE", Int64.Type}, {"VOLUME_CX", Int64.Type}, {"DATA_DESPACHO", type datetime}, {"DATA_ENTREGA", type any}, {"ENTREGA_DIAS", type number}, {"ESTADO_BR", type text}, {"UF", type text}, {"FRETE_CUSTO", type number}, {"FORMA_PAGAMENTO", type text}, {"Column12", type any}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"Column12"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
